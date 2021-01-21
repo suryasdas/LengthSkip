@@ -13,6 +13,7 @@
 		4E8288BC25B9C483005DA75E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E8288BB25B9C483005DA75E /* Preview Assets.xcassets */; };
 		4E8288C625B9C4B3005DA75E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8288C525B9C4B3005DA75E /* LocationManager.swift */; };
 		4E8288CA25B9C7BF005DA75E /* MKCoordinateRegion+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8288C925B9C7BF005DA75E /* MKCoordinateRegion+Extensions.swift */; };
+		4E864C5E25B9E68100B21792 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E864C5D25B9E68100B21792 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		4E8288BD25B9C483005DA75E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E8288C525B9C4B3005DA75E /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		4E8288C925B9C7BF005DA75E /* MKCoordinateRegion+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Extensions.swift"; sourceTree = "<group>"; };
+		4E864C5D25B9E68100B21792 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E864C5E25B9E68100B21792 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +45,7 @@
 			children = (
 				4E8288B325B9C482005DA75E /* project-map */,
 				4E8288B225B9C482005DA75E /* Products */,
+				4E864C5C25B9E68100B21792 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,6 +93,14 @@
 				4E8288C925B9C7BF005DA75E /* MKCoordinateRegion+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4E864C5C25B9E68100B21792 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4E864C5D25B9E68100B21792 /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
