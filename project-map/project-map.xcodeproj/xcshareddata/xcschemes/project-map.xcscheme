@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4E8288B025B9C482005DA75E"
+               BlueprintIdentifier = "4EB8DA9B25B9F88C00336222"
                BuildableName = "project-map.app"
                BlueprintName = "project-map"
                ReferencedContainer = "container:project-map.xcodeproj">
@@ -44,7 +44,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4E8288B025B9C482005DA75E"
+            BlueprintIdentifier = "4EB8DA9B25B9F88C00336222"
             BuildableName = "project-map.app"
             BlueprintName = "project-map"
             ReferencedContainer = "container:project-map.xcodeproj">
@@ -65,7 +65,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4E8288B025B9C482005DA75E"
+            BlueprintIdentifier = "4EB8DA9B25B9F88C00336222"
             BuildableName = "project-map.app"
             BlueprintName = "project-map"
             ReferencedContainer = "container:project-map.xcodeproj">
