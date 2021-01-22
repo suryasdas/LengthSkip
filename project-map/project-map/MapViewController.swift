@@ -33,6 +33,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         guard let location = locations.last else { return }
         let region = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: 4000, longitudinalMeters: 4000)
         mapView.setRegion(region, animated: true)
+        mapView.setCameraBoundary(
+              MKMapView.CameraBoundary(coordinateRegion: region),
+              animated: true)
+
+            let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
+            mapView.setCameraZoomRange(zoomRange, animated: true)
     }
     
     func checkLocationAuthorization() {
@@ -68,6 +74,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         if let location = locationManager.location?.coordinate {
             let region = MKCoordinateRegion.init(center: location, latitudinalMeters: 4000, longitudinalMeters: 4000)
             mapView.setRegion(region, animated: true)
+            mapView.setCameraBoundary(
+              MKMapView.CameraBoundary(coordinateRegion: region),
+              animated: true)
+
+            let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
+            mapView.setCameraZoomRange(zoomRange, animated: true)
         }
     }
     
