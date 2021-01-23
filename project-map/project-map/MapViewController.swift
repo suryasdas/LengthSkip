@@ -4,7 +4,6 @@
 //
 //  Created by Surya Das on 1/21/21.
 //
-
 import UIKit
 import MapKit
 import CoreLocation
@@ -13,7 +12,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     let mapView = MKMapView()
     let locationManager = CLLocationManager()
-    
+    //@IBOutlet private var mapView: MKMapView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMapView()
@@ -39,6 +39,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
             let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
             mapView.setCameraZoomRange(zoomRange, animated: true)
+        if let location = locations.first {
+                    print("location:: (location)")
+                }
     }
     
     func checkLocationAuthorization() {
