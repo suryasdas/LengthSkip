@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "kisspng-car-dealership-vector-graphics-royalty-free-comput-5c679cc03252e4.7320037815502942082061.jpeg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "kisspng-car-dealership-vector-graphics-royalty-free-comput-5c679cc03252e4.7320037815502942082061 copy.jpeg",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "kisspng-car-dealership-vector-graphics-royalty-free-comput-5c679cc03252e4.7320037815502942082061 copy 2.jpeg",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
