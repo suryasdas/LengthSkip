@@ -25,9 +25,9 @@ class ViewController : UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
-        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier:"LocationSearchTable") as! LocationSearchTable
-        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
-        resultSearchController?.searchResultsUpdater = locationSearchTable as UISearchResultsUpdating
+        let LocationSearchTable = storyboard!.instantiateViewController(withIdentifier:"LocationSearchTable") as! LocationSearchTable
+        resultSearchController = UISearchController(searchResultsController: LocationSearchTable)
+        resultSearchController?.searchResultsUpdater = LocationSearchTable as UISearchResultsUpdating
         let searchBar = resultSearchController!.searchBar
         searchBar.sizeToFit()
         searchBar.placeholder = "Enter Address"
@@ -35,8 +35,8 @@ class ViewController : UIViewController {
         resultSearchController?.hidesNavigationBarDuringPresentation = false
 //        resultSearchController?.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
-        locationSearchTable.mapView = mapView
-        locationSearchTable.handleMapSearchDelegate = self
+        LocationSearchTable.mapView = mapView
+        LocationSearchTable.handleMapSearchDelegate = self
     }
     func getDirections(){
         if let selectedPin = selectedPin {
@@ -47,26 +47,6 @@ class ViewController : UIViewController {
     }
 }
 
-//extension ViewController : CLLocationManagerDelegate {
-//    private func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-//        if status == .authorizedWhenInUse {
-//            locationManager.requestLocation()
-//        }
-//    }
-//
-//    private func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        if let location = locations.first {
-//            //init(latitudeDelta: CLLocationDegrees, longitudeDelta:CLLocationDegrees)
-//            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-//            let region = MKCoordinateRegion(center: location.coordinate, span: span)
-//            mapView.setRegion(region, animated: true)
-//        }
-//    }
-//
-//    private func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-//        print("error:: \(error)")
-//    }
-//}
 
 extension ViewController : CLLocationManagerDelegate {
     
@@ -75,6 +55,7 @@ extension ViewController : CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        checkLocationAuthorization()
         if status == .authorizedWhenInUse {
             locationManager.requestLocation()
         }
@@ -82,24 +63,80 @@ extension ViewController : CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        if let location = locations.first {
             guard let location = locations.last else { return }
+            followUserLocation()
             //init(latitudeDelta: CLLocationDegrees, longitudeDelta:CLLocationDegrees)
-            let span = MKCoordinateSpan.init(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            let region = MKCoordinateRegion.init(center: location.coordinate, span: span)
+        //let span = MKCoordinateSpan.init(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            let region = MKCoordinateRegion.init(center: location.coordinate,latitudinalMeters: 4000, longitudinalMeters: 4000)
             mapView.setRegion(region, animated: true)
-            mapView.setCameraBoundary(
-                MKMapView.CameraBoundary(coordinateRegion: region),
-                animated: true)
-            
-            let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
-            mapView.setCameraZoomRange(zoomRange, animated: true)
-            
-        }
+//            mapView.setCameraBoundary(
+//                MKMapView.CameraBoundary(coordinateRegion: region),
+//                animated: true)
+//
+//            let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
+//            mapView.setCameraZoomRange(zoomRange, animated: true)
+//        if let location = locations.first {
+//            print("location:: (location)")
+//        }
         
     }
     
+    // COPIED FROM MAP_VIEW_CONTROLLER
+
+    func checkLocationAuthorization() {
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse:
+            mapView.showsUserLocation = true
+            followUserLocation()
+            locationManager.startUpdatingLocation()
+            break
+        case .denied:
+            // Show alert
+            break
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted:
+            // Show alert
+            break
+        case .authorizedAlways:
+            break
+        @unknown default:
+            break
+        }
+    }
+
+    func checkLocationServices() {
+        if CLLocationManager.locationServicesEnabled() {
+            setupLocationManager()
+            checkLocationAuthorization()
+        } else {
+            // the user didn't turn it on
+        }
+    }
+
+    func followUserLocation() {
+        if let location = locationManager.location?.coordinate {
+            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: 4000, longitudinalMeters: 4000)
+            mapView.setRegion(region, animated: true)
+//            mapView.setCameraBoundary(
+//              MKMapView.CameraBoundary(coordinateRegion: region),
+//              animated: true)
+//
+//            let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
+//            mapView.setCameraZoomRange(zoomRange, animated: true)
+            
+        }
+    }
+
+    func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+
+    //TILL HERE
+
 }
+
 
 
 extension ViewController: HandleMapSearch {
