@@ -3,12 +3,14 @@
     {
       "idiom" : "iphone",
       "scale" : "2x",
-      "size" : "20x20"
+      "size" : "20x20",
+      "filename":"20x20.png"
     },
     {
       "idiom" : "iphone",
       "scale" : "3x",
-      "size" : "20x20"
+      "size" : "20x20",
+      "filename":"logo.png"
     },
     {
       "idiom" : "iphone",
@@ -34,6 +36,7 @@
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
+
     },
     {
       "idiom" : "iphone",
@@ -88,7 +91,8 @@
     {
       "idiom" : "ios-marketing",
       "scale" : "1x",
-      "size" : "1024x1024"
+      "size" : "1024x1024",
+      "filename":"logocopy.png"
     }
   ],
   "info" : {

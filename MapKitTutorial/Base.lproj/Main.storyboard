@@ -8,50 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Location Search Table-->
-        <scene sceneID="MM3-d3-Cq8">
-            <objects>
-                <tableViewController storyboardIdentifier="LocationSearchTable" id="qUb-bK-SZQ" customClass="LocationSearchTable" customModule="MapKitTutorial" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="7OT-fx-EzO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="NPY-67-CxD" detailTextLabel="Sh6-82-l38" style="IBUITableViewCellStyleSubtitle" id="6mu-8P-sk2">
-                                <rect key="frame" x="0.0" y="28" width="414" height="55.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6mu-8P-sk2" id="UJf-gU-MBw">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="55.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NPY-67-CxD">
-                                            <rect key="frame" x="20" y="10" width="33" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Sh6-82-l38">
-                                            <rect key="frame" x="20" y="31.5" width="44" height="14.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="delegate" destination="qUb-bK-SZQ" id="btS-CP-lav"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0YT-oi-eB5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-945" y="-385"/>
-        </scene>
-        <!--View Controller-->
+        <!--LengthSkip-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MapKitTutorial" customModuleProvider="target" sceneMemberID="viewController">
@@ -65,6 +22,21 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="ZDE-CZ-qyf"/>
                                 </connections>
                             </mapView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="1qv-58-9yE">
+                                <rect key="frame" x="0.0" y="453" width="414" height="443"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="nP6-2p-LwI"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="eef-Xz-gt9"/>
+                            </scrollView>
+                            <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Enter Location" showsSearchResultsButton="YES" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lq0-Ge-xlE">
+                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -75,9 +47,10 @@
                             <constraint firstItem="DO8-Zy-uEH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Wus-QA-qhg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="uSd-3R-ugk"/>
+                    <navigationItem key="navigationItem" title="LengthSkip" largeTitleDisplayMode="never" id="uSd-3R-ugk"/>
                     <connections>
                         <outlet property="mapView" destination="DO8-Zy-uEH" id="Npt-bu-Vus"/>
+                        <outlet property="searchBar" destination="Lq0-Ge-xlE" id="AIc-u9-LL6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -87,9 +60,10 @@
         <!--Navigation Controller-->
         <scene sceneID="SXp-vU-mdc">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FQj-bY-aE9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WBg-3I-cRu" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="z4m-fk-oxx">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackTranslucent" id="z4m-fk-oxx">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -98,7 +72,6 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ksG-9g-32G"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FQj-bY-aE9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="85.507246376811594" y="58.928571428571423"/>
         </scene>

@@ -8,16 +8,32 @@
 import UIKit
 import MapKit
 
+
+
 protocol HandleMapSearch {
     func dropPinZoomIn(placemark:MKPlacemark)
 }
 
-class ViewController : UIViewController {
+class ViewController : UIViewController, UISearchBarDelegate {
+    
+    var searchController:UISearchController!
     let locationManager = CLLocationManager()
     var selectedPin:MKPlacemark? = nil
     var resultSearchController:UISearchController? = nil
     
     @IBOutlet weak var mapView: MKMapView!
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBAction func showSearchBar(_ sender: AnyObject) {
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.hidesNavigationBarDuringPresentation = true
+        self.searchController.searchBar.delegate = self
+        present(searchController, animated: true, completion: nil)
+    }
+    
+    func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+            self.searchBar.endEditing(true)
+        }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,18 +41,18 @@ class ViewController : UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
-        let LocationSearchTable = storyboard!.instantiateViewController(withIdentifier:"LocationSearchTable") as! LocationSearchTable
-        resultSearchController = UISearchController(searchResultsController: LocationSearchTable)
-        resultSearchController?.searchResultsUpdater = LocationSearchTable as UISearchResultsUpdating
-        let searchBar = resultSearchController!.searchBar
-        searchBar.sizeToFit()
-        searchBar.placeholder = "Enter Address"
+//        let LocationSearchTable = storyboard!.instantiateViewController(withIdentifier:"LocationSearchTable") as! LocationSearchTable
+//        resultSearchController = UISearchController(searchResultsController: LocationSearchTable)
+//        resultSearchController?.searchResultsUpdater = LocationSearchTable as UISearchResultsUpdating
+//        let searchBar = resultSearchController!.searchBar
+//        searchBar.sizeToFit()
+//        searchBar.placeholder = "Enter Address"
         navigationItem.titleView = resultSearchController?.searchBar
-        resultSearchController?.hidesNavigationBarDuringPresentation = false
+        resultSearchController?.hidesNavigationBarDuringPresentation = true
 //        resultSearchController?.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
-        LocationSearchTable.mapView = mapView
-        LocationSearchTable.handleMapSearchDelegate = self
+//        LocationSearchTable.mapView = mapView
+//        LocationSearchTable.handleMapSearchDelegate = self
     }
     func getDirections(){
         if let selectedPin = selectedPin {

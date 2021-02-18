@@ -7,6 +7,8 @@
 
 import UIKit
 import MapKit
+
+
 class LocationSearchTable : UITableViewController {
     var matchingItems:[MKMapItem] = []
     var mapView: MKMapView? = nil
@@ -73,6 +75,7 @@ extension LocationSearchTable {
         return cell
     }
 }
+
 extension LocationSearchTable {
     func tableView( tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedItem = matchingItems[indexPath.row].placemark
