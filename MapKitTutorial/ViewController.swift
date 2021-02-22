@@ -34,6 +34,16 @@ class ViewController : UIViewController, UISearchBarDelegate {
     func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
             self.searchBar.endEditing(true)
         }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        // Stop doing the search stuff
+        // and clear the text in the search bar
+        searchBar.text = ""
+        // Hide the cancel button
+        searchBar.showsCancelButton = false
+        searchBar.endEditing(true)
+        // You could also change the position, frame etc of the searchBar
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,16 +61,18 @@ class ViewController : UIViewController, UISearchBarDelegate {
         resultSearchController?.hidesNavigationBarDuringPresentation = true
 //        resultSearchController?.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
+        searchBar.showsCancelButton = true
+        searchBar.delegate = self
 //        LocationSearchTable.mapView = mapView
 //        LocationSearchTable.handleMapSearchDelegate = self
     }
-    func getDirections(){
-        if let selectedPin = selectedPin {
-            let mapItem = MKMapItem(placemark: selectedPin)
-            let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
-            mapItem.openInMaps(launchOptions: launchOptions)
-        }
-    }
+//    func getDirections(){
+//        if let selectedPin = selectedPin {
+//            let mapItem = MKMapItem(placemark: selectedPin)
+//            let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+//            mapItem.openInMaps(launchOptions: launchOptions)
+//        }
+//    }
 }
 
 

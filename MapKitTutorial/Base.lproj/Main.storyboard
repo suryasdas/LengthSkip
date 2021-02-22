@@ -51,6 +51,7 @@
                     <connections>
                         <outlet property="mapView" destination="DO8-Zy-uEH" id="Npt-bu-Vus"/>
                         <outlet property="searchBar" destination="Lq0-Ge-xlE" id="AIc-u9-LL6"/>
+                        <outletCollection property="searchBar" destination="Lq0-Ge-xlE" collectionClass="NSMutableArray" id="1Td-kq-CmG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -60,7 +61,6 @@
         <!--Navigation Controller-->
         <scene sceneID="SXp-vU-mdc">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FQj-bY-aE9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WBg-3I-cRu" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackTranslucent" id="z4m-fk-oxx">
@@ -72,6 +72,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ksG-9g-32G"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FQj-bY-aE9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="85.507246376811594" y="58.928571428571423"/>
         </scene>
