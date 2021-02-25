@@ -23,24 +23,24 @@ class ViewController : UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBAction func showSearchBar(_ sender: AnyObject) {
-        searchController = UISearchController(searchResultsController: nil)
-        searchController.hidesNavigationBarDuringPresentation = true
-        self.searchController.searchBar.delegate = self
-        present(searchController, animated: true, completion: nil)
-    }
+    //@IBOutlet weak var searchBar: UISearchBar!
+//    @IBAction func showSearchBar(_ sender: AnyObject) {
+//        searchController = UISearchController(searchResultsController: nil)
+//        searchController.hidesNavigationBarDuringPresentation = true
+//        self.searchController.searchBar.delegate = self
+//        present(searchController, animated: true, completion: nil)
+//    }
     
-    func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-            self.searchBar.endEditing(true)
-        }
+//    func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+//            self.searchBar.endEditing(true)
+//        }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         // Stop doing the search stuff
         // and clear the text in the search bar
         searchBar.text = ""
         // Hide the cancel button
-        searchBar.showsCancelButton = false
+        searchBar.showsCancelButton = true
         searchBar.endEditing(true)
         // You could also change the position, frame etc of the searchBar
     }
@@ -51,28 +51,30 @@ class ViewController : UIViewController, UISearchBarDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
-//        let LocationSearchTable = storyboard!.instantiateViewController(withIdentifier:"LocationSearchTable") as! LocationSearchTable
-//        resultSearchController = UISearchController(searchResultsController: LocationSearchTable)
-//        resultSearchController?.searchResultsUpdater = LocationSearchTable as UISearchResultsUpdating
-//        let searchBar = resultSearchController!.searchBar
-//        searchBar.sizeToFit()
-//        searchBar.placeholder = "Enter Address"
-        navigationItem.titleView = resultSearchController?.searchBar
+        let LocationSearchTable = storyboard!.instantiateViewController(withIdentifier:"LocationSearchTable") as! LocationSearchTable
+        resultSearchController = UISearchController(searchResultsController: LocationSearchTable)
+        resultSearchController?.searchResultsUpdater = LocationSearchTable
+        let searchBar = resultSearchController!.searchBar
+        searchBar.sizeToFit()
+        searchBar.placeholder = "Enter Address"
+        navigationItem.searchController = resultSearchController
+//        navigationItem.titleView = resultSearchController?.searchBar
         resultSearchController?.hidesNavigationBarDuringPresentation = true
-//        resultSearchController?.dimsBackgroundDuringPresentation = true
+        resultSearchController?.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         searchBar.showsCancelButton = true
         searchBar.delegate = self
-//        LocationSearchTable.mapView = mapView
-//        LocationSearchTable.handleMapSearchDelegate = self
+        LocationSearchTable.mapView = mapView
+        LocationSearchTable.handleMapSearchDelegate = self
     }
-//    func getDirections(){
-//        if let selectedPin = selectedPin {
-//            let mapItem = MKMapItem(placemark: selectedPin)
-//            let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
-//            mapItem.openInMaps(launchOptions: launchOptions)
-//        }
-//    }
+    
+    func getDirections(){
+        if let selectedPin = selectedPin {
+            let mapItem = MKMapItem(placemark: selectedPin)
+            let launchOptions = [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving]
+            mapItem.openInMaps(launchOptions: launchOptions)
+        }
+    }
 }
 
 
@@ -93,23 +95,11 @@ extension ViewController : CLLocationManagerDelegate {
         
             guard let location = locations.last else { return }
             followUserLocation()
-            //init(latitudeDelta: CLLocationDegrees, longitudeDelta:CLLocationDegrees)
-        //let span = MKCoordinateSpan.init(latitudeDelta: 0.05, longitudeDelta: 0.05)
             let region = MKCoordinateRegion.init(center: location.coordinate,latitudinalMeters: 4000, longitudinalMeters: 4000)
             mapView.setRegion(region, animated: true)
-//            mapView.setCameraBoundary(
-//                MKMapView.CameraBoundary(coordinateRegion: region),
-//                animated: true)
-//
-//            let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
-//            mapView.setCameraZoomRange(zoomRange, animated: true)
-//        if let location = locations.first {
-//            print("location:: (location)")
-//        }
-        
     }
     
-    // COPIED FROM MAP_VIEW_CONTROLLER
+   
 
     func checkLocationAuthorization() {
         switch CLLocationManager.authorizationStatus() {
@@ -146,13 +136,6 @@ extension ViewController : CLLocationManagerDelegate {
         if let location = locationManager.location?.coordinate {
             let region = MKCoordinateRegion.init(center: location, latitudinalMeters: 4000, longitudinalMeters: 4000)
             mapView.setRegion(region, animated: true)
-//            mapView.setCameraBoundary(
-//              MKMapView.CameraBoundary(coordinateRegion: region),
-//              animated: true)
-//
-//            let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
-//            mapView.setCameraZoomRange(zoomRange, animated: true)
-            
         }
     }
 
@@ -165,8 +148,6 @@ extension ViewController : CLLocationManagerDelegate {
 
 }
 
-
-
 extension ViewController: HandleMapSearch {
     func dropPinZoomIn(placemark:MKPlacemark){
         // cache the pin
@@ -176,8 +157,8 @@ extension ViewController: HandleMapSearch {
         let annotation = MKPointAnnotation()
         annotation.coordinate = placemark.coordinate
         annotation.title = placemark.name
-        if let _ = placemark.locality,
-           let _ = placemark.administrativeArea {
+        if let city = placemark.locality,
+        let state = placemark.administrativeArea {
             annotation.subtitle = "(city) (state)"
         }
         mapView.addAnnotation(annotation)
@@ -186,6 +167,7 @@ extension ViewController: HandleMapSearch {
         mapView.setRegion(region, animated: true)
     }
 }
+
 extension ViewController : MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{
         if annotation is MKUserLocation {
