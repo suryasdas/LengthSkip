@@ -7,12 +7,15 @@
 
 import UIKit
 import MapKit
-
+import CoreLocation
 
 class LocationSearchTable : UITableViewController {
+    var temp1=CLLocationDegrees()
+    var temp2=CLLocationDegrees()
     var matchingItems:[MKMapItem] = []
     var mapView: MKMapView? = nil
     var handleMapSearchDelegate:HandleMapSearch? = nil
+    var loc2=CLLocationCoordinate2D.init(latitude: 33.7835274, longitude: -118.1153002)
     
     func parseAddress(selectedItem:MKPlacemark) -> String {
         // put a space between "4" and "Melrose Place"
@@ -78,8 +81,21 @@ extension LocationSearchTable {
 
 extension LocationSearchTable {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        temp1 = loc2.latitude
+        temp2 = loc2.longitude
+        print(temp1, temp2)
         let selectedItem = matchingItems[indexPath.row].placemark
         handleMapSearchDelegate?.dropPinZoomIn(placemark: selectedItem)
         dismiss(animated: true, completion: nil)
+        temp1=selectedItem.coordinate.latitude
+        temp2=selectedItem.coordinate.longitude
+        print("pro1:",temp1)
+        print("pro2:",temp2)
+    }
+    func retrieveLocationlati() -> CLLocationDegrees{
+        return temp1
+    }
+    func retrieveLocationlong() -> CLLocationDegrees{
+        return temp2
     }
 }
